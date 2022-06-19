@@ -22,6 +22,11 @@ export default {
 
 <style lang="less" scoped>
 #MSplayer-wapper {
+  position: fixed;
   padding: 20px;
+  width: 100%;
+  border: 1px solid red;
+  background-color: black;
+  bottom: 0;
 }
 </style>

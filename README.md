@@ -5,15 +5,12 @@
 真实网易云接口
 
 #### 软件架构
-软件架构说明
-
+  Bootstrap + vue2 + Element UI
 
 #### 安装教程
-
 1.  npm i 
 
 #### 使用说明
-
 1.  npm run serve
 
 # 项目中的问题和制作步骤
@@ -37,50 +34,71 @@ npm i vue-router@3
 ```
 
 # 期间遇到的问题
+
 1. 在使用Elment UI按需使用
->解决方式
-```shell
-# 按需使用Element UI
-npm install babel-plugin-component -D
-```
-* 将main.js文件中的所有关于Element UI删除
-* 在[babel.config.js]文件中添加
-```js
-"plugins": [
-    [
-      "component",
-      {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
-      }
-    ]
-  ]d
-* 在main.js重新改写Element UI使用方法
-```js
-// 按需引用
-import {
-  Message
-} from 'element-ui';
+    >解决方式
+    ```shell
+    # 按需使用Element UI
+    npm install babel-plugin-component -D
+    ```
+    * 将main.js文件中的所有关于Element UI删除
+    * 在[babel.config.js]文件中添加
+    ```js
+    "plugins": [
+        [
+          "component",
+          {
+            "libraryName": "element-ui",
+            "styleLibraryName": "theme-chalk"
+          }
+        ]
+      ]d
+    * 在main.js重新改写Element UI使用方法
+    ```js
+    // 按需引用
+    import {
+      Message
+    } from 'element-ui';
 
-// 在原型上都能使用message方法
-Vue.prototype.$message = Message
+    // 在原型上都能使用message方法
+    Vue.prototype.$message = Message
+    ```
 
-```
 2. 在获取数据的时候，写的参数不对
->在query的第一个参数写?后面的写&
-```js
-/artist/songs?id=${id}&limit=30
-```
-3. 在使用this.$router传query的时候，传递不过去
->query必须是一个对象
-```js
-toMusicPlayer(id) {
-this.$router.push({
-  path: "/musicPlayer",
-  query:{id}
-});
-```
+    >在query的第一个参数写?后面的写&
+    ```js
+    /artist/songs?id=${id}&limit=30
+    ```
 
+3. 在使用this.$router传query的时候，传递不过去
+   >query必须是一个对象
+    ```js
+    toMusicPlayer(id) {
+    this.$router.push({
+      path: "/musicPlayer",
+      query:{id}
+    });
+    ```
+
+4. 路由跳转的时候，将滚轮置顶
+   * 在new router的时候里面加上
+    ```js
+    const router = new VueRouter({
+    mode: 'history',
+    routes: [
+      ...
+      ],
+      scrollBehavior(){
+        return {y:0}
+      }
+    })
+    ```
+
+5. 在点击下一页，路由不跳转，只是vue重现渲染
+    >直接控制DOM节点
+    ```js
+    document.documentElement.scrollTop = 0;
+    ```
 
 ## 忘记的
 >bug : 在初次挂载的时候，arr没有数据，但是可以便利，出现bug，
@@ -133,3 +151,5 @@ let obj1 = {a:1,b:2}
 
 # 巴掌的教训
 1. 写完router-link 一定要写to和router-view
+2. 在组件中使用@click等都是自定义事件，所以要想使用原生的需要加 .native
+

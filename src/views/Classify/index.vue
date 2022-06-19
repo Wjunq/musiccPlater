@@ -1,8 +1,4 @@
 <template>
-<!-- 
-未完善的功能：
-点击下一页和上一页之后，要将滑轮滚到最上面
- -->
   <div id="main-wapper">
     <div v-show="$route.fullPath === '/classify'">
       <!-- 标题 -->
@@ -13,19 +9,39 @@
       <div>
         <span style="padding-right: 20px"><strong>歌手分类:</strong> </span>
         <el-radio-group v-model="singerCheck.type" style="padding-right: 40px">
-          <el-radio-button label="-1">全部</el-radio-button>
-          <el-radio-button label="1">男歌手</el-radio-button>
-          <el-radio-button label="2">女歌手</el-radio-button>
-          <el-radio-button label="3">乐队</el-radio-button>
+          <el-radio-button @click.native="handlerAttribute" label="-1"
+            >全部</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="1"
+            >男歌手</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="2"
+            >女歌手</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="3"
+            >乐队</el-radio-button
+          >
         </el-radio-group>
         <span style="padding-right: 20px"><strong>地区:</strong></span>
         <el-radio-group v-model="singerCheck.area">
-          <el-radio-button label="-1">全部</el-radio-button>
-          <el-radio-button label="7">华语</el-radio-button>
-          <el-radio-button label="96">欧美</el-radio-button>
-          <el-radio-button label="8">日本</el-radio-button>
-          <el-radio-button label="16">韩国</el-radio-button>
-          <el-radio-button label="0">其他</el-radio-button>
+          <el-radio-button @click.native="handlerAttribute" label="-1"
+            >全部</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="7"
+            >华语</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="96"
+            >欧美</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="8"
+            >日本</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="16"
+            >韩国</el-radio-button
+          >
+          <el-radio-button @click.native="handlerAttribute" label="0"
+            >其他</el-radio-button
+          >
         </el-radio-group>
       </div>
       <!-- 用于展示歌手列表-->
@@ -35,7 +51,7 @@
             <img
               :src="art.img1v1Url"
               :alt="art.name"
-              @click="handlerToDetail(art.name,art.img1v1Url,art.id)"
+              @click="handlerToDetail(art.name, art.img1v1Url, art.id)"
             />
             <div class="caption">
               <h3>{{ art.name }}</h3>
@@ -51,7 +67,7 @@
     </div>
 
     <!--  -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -74,6 +90,7 @@ export default {
     this.getSingerList();
   },
   methods: {
+    // 处理歌手数据的回调
     async getSingerList() {
       let result = await reqSingerList(this.singerCheck);
       if (result.code === 200) {
@@ -86,6 +103,11 @@ export default {
         });
       }
     },
+    // 处理改变歌手和地区，点击要回到第一页的回调
+    handlerAttribute() {
+      this.singerCheck.offset = 0;
+      this.getSingerList();
+    },
     // 处理上一页按钮的回调
     handlerOlder() {
       if (this.singerCheck.offset === 0) {
@@ -95,12 +117,16 @@ export default {
         });
       } else {
         this.singerCheck.offset -= 30;
+        document.documentElement.scrollTop = 0;
+        this.getSingerList();
       }
     },
     // 处理下一页按钮的回调
     hadlerNext() {
       if (this.singerCheck.more) {
         this.singerCheck.offset += 30;
+        document.documentElement.scrollTop = 0;
+        this.getSingerList();
       } else {
         this.$message({
           type: "warning",
@@ -109,20 +135,12 @@ export default {
       }
     },
     // 跳转歌手主页的回调
-    handlerToDetail(name,img1v1Url,id) {
-      const singerDetail = {name,img1v1Url,id}
+    handlerToDetail(name, img1v1Url, id) {
+      const singerDetail = { name, img1v1Url, id };
       this.$router.push({
-        path:'/classify/classifyDetails',
-        query:singerDetail
-      })
-    },
-  },
-  watch: {
-    singerCheck: {
-      deep: true,
-      handler() {
-        this.getSingerList();
-      },
+        path: "/classify/classifyDetails",
+        query: singerDetail,
+      });
     },
   },
 };

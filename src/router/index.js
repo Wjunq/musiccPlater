@@ -6,7 +6,7 @@ import Home from '@/views/Home'
 const router = new VueRouter({
     mode: 'history',
     routes: [{
-            name: 'home',
+            name: 'Home',
             path: '/home',
             component: Home,
         },
@@ -15,22 +15,26 @@ const router = new VueRouter({
             path: "/classify",
             component: () => import('@/views/Classify'),
             children: [{
-                    name: "classifyDetails",
+                    name: "ClassifyDetails",
                     path: "classifyDetails",
                     component: () => import('@/views/Classify/classifyDetails')
                 },
-
             ]
         },
         {
-            name: 'musicPlayer',
+            name: 'MusicPlayer',
             path: '/musicPlayer',
             component: () => import('@/views/musicPlayer')
         },
         {
-            name: 'login',
+            name: 'Login',
             path: '/login',
             component: () => import('@/views/Login')
+        },
+        {
+            name:'Transceiver',
+            path:'/transceiver',
+            component:()=>import("@/views/Transceiver")
         },
         {
             path: '/test',
@@ -40,7 +44,10 @@ const router = new VueRouter({
             path: '/',
             component: Home
         }
-    ]
+    ],
+    scrollBehavior(){
+        return {y:0}
+    }
 })
 
 export default router

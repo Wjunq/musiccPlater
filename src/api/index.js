@@ -2,8 +2,10 @@ import ajax from "./ajax";
 
 //  用请求banner的数据
 export const reqBannerList = () => ajax.get('/banner?type=0')
+// 用于请求电台banner
+export const reqTransceiverBanner = () => ajax.get('/dj/banner')      
 // 用于登录的请求
-export const reqLogin = (phone,password) => ajax.post(`/login/cellphone?phone=${phone}&password=${password}&captcha=`)
+export const reqLogin = (phone,password) => ajax.post(`/login/cellphone?phone=${phone}&password=${password}`)
 // 用于获取歌手分类列表
 export const reqSingerList = ({type,area,offset})=>ajax.get(`/artist/list?type=${type}&area=${area}&offset=${offset}`)
 // 用于请求歌手的全部歌曲

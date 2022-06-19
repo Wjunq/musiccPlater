@@ -101,7 +101,7 @@ export default {
   methods: {
     async handlerLogin() {
       const { phone, password } = this;
-      // 判断是否为空
+      // 手机和密码登录
       if (phone && password) {
         let result = await reqLogin(phone, password);
         if (result.code === 200) {
@@ -134,7 +134,7 @@ export default {
       if(iphone && visibleNum){
         let result = await reqCaptchaIsOk(iphone,visibleNum);
         if(result.code === 200){
-          
+          console.log(result)
         }else{
           this.$message({
             type:"warning",

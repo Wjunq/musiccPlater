@@ -1,34 +1,12 @@
 <template>
-  <div id="banne-wapper">
-    <div id="banner">
-      <!--轮播图容器-->
-      <div class="swiper-container" ref="banner_swiper">
-        <!-- 承装每一屏 -->
-        <div class="swiper-wrapper">
-          <!-- v-for生成每一屏 -->
-          <div
-            class="swiper-slide"
-            v-for="(banner,index) in bannerList"
-            :key="banner.targetId+index"
-          >
-           <img :src="banner.imageUrl" alt="">
-          </div>
-        </div>
-        <!-- 小圆点 -->
-        <div class="swiper-pagination"></div>
-        <!-- 上一张、下一张按钮 -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-    </div>
-  </div>
+  <el-carousel :interval="4000" type="card" height="350px">
+    <el-carousel-item v-for="(banner,index) in bannerList" :key="banner.encodeId + index">
+      <img :src="banner.imageUrl" alt="">
+    </el-carousel-item>
+  </el-carousel>
 </template>
 
 <script>
-// 引入Swpier
-import Swiper from "swiper";
-import "swiper/css/swiper.min.css";
-// 引入banner数据
 import { reqBannerList } from "@/api";
 export default {
   name: "Banner",
@@ -56,39 +34,30 @@ export default {
   watch: {
     bannerList() {
       this.$nextTick(() => {
-        new Swiper(this.$refs.banner_swiper, {
-          spaceBetween: 30, //每一屏之间的距离
-          autoplay: {
-            //自动轮播配置
-            delay: 2000, //轮播间隔
-            disableOnInteraction: false, //鼠标操作后，是否禁用自动轮播
-          },
-          pagination: {
-            el: ".swiper-pagination", //小圆点容器
-            clickable: true, //小圆点是否可以点击
-          },
-          navigation: {
-            nextEl: ".swiper-button-next", //下一张按钮的选择器
-            prevEl: ".swiper-button-prev", //上一张按钮的选择器
-          },
-        });
       });
     },
   },
 };
 </script>
 
-<style lang="less" scoped>
-#banne-wapper {
-  display: flex;
-  justify-content: center;
-  background-image:url('./bg.png');
-  background-repeat: no-repeat;
-  background-size: 100% 200%;
-  background-position-y:-175px ;
-  background-color: #E6E6F2;
-  #banner {
-    width: 1080px;
+<style scoped>
+ .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
   }
-}
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
 </style>

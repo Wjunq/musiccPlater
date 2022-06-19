@@ -20,6 +20,9 @@
             <li>
               <router-link to="/classify">歌手分类</router-link>
             </li>
+            <li>
+              <router-link to="/transceiver">电 台</router-link>
+            </li>
           </ul>
           <!-- 搜索音乐表单 -->
           <form class="navbar-form navbar-left">
