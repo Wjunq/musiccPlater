@@ -1,7 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath:"/./",
   lintOnSave:false,
   devServer:{
     proxy:{
@@ -12,4 +11,3 @@ module.exports = defineConfig({
     }
   }
 })
-// https://cloud-music-api-lyart.vercel.app

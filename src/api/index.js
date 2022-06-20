@@ -13,8 +13,11 @@ export const reqSingerAll = (id,offset)=>ajax.get(`/artist/songs?id=${id}&limit=
 
 // 用于请求音乐Url的回调,服务器更新了有问题
 // export const reqMusicUrl = (id) => ajax.get(`/song/url?id=${id}`)
+// 获取歌词的请求
+export const reqMusiclLyric = (id) => ajax.get(`/lyric?id=${id}`)
 
 // 用于请求发送手机验证码的回调
 export const reqSendPhoneVerify = (phone) => ajax.get(`/captcha/sent?phone=${phone}`)
 // 用于请求验证验证码是否成功
 export const reqCaptchaIsOk = (phone,captcha) => ajax.get(`/captcha/verify?phone=${phone}&captcha=${captcha}`)
+
