@@ -20,4 +20,13 @@ export const reqMusiclLyric = (id) => ajax.get(`/lyric?id=${id}`)
 export const reqSendPhoneVerify = (phone) => ajax.get(`/captcha/sent?phone=${phone}`)
 // 用于请求验证验证码是否成功
 export const reqCaptchaIsOk = (phone,captcha) => ajax.get(`/captcha/verify?phone=${phone}&captcha=${captcha}`)
+// 用于游客登录的回调  ,该接口有问题
+export const reqAnonimous = () => ajax.post('/register/anonimous');
+// 用于163邮箱登录的回调
+export const reqEmail = ({email,passwd}) => ajax.post(`/login?email=${email}@163.com&password=${passwd}`)
+// 用于请求二维码key的请求
+export const reqQrKey = () => ajax.get('/login/qr/key',Date.now())
+// 用于生成二维码的回调
+export const reqQrCreate = (key) => ajax.get(`/login/qr/create?key=${key}`,Date.now())
+
 

@@ -8,7 +8,17 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    
+    <!-- 切换按钮区域 -->
+    <div class="elTabs">
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="用户管理" name="first">推荐</el-tab-pane>
+        <el-tab-pane label="配置管理" name="second">分类</el-tab-pane>
+        <el-tab-pane label="角色管理" name="third">分类推荐</el-tab-pane>
+        <el-tab-pane label="定时任务补偿" name="fourth"
+          >付费精品</el-tab-pane
+        >
+      </el-tabs>
+    </div>
   </div>
 </template>
 
@@ -19,6 +29,7 @@ export default {
   data() {
     return {
       djBanner: [],
+      activeName: "second",
     };
   },
   methods: {
@@ -34,6 +45,9 @@ export default {
         });
       }
     },
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
   },
   mounted() {
     this.getTransceiverBanner();
@@ -42,13 +56,20 @@ export default {
 </script>
 
 <style scoped>
-#transceiver-wapper{
+#transceiver-wapper {
   display: flex;
-  justify-content: center;
-  text-align: center;
+  flex-direction: column;
+  align-content: center;
 }
 #banner-wapper {
+  margin: 0 auto;
   width: 50%;
+  margin-bottom: 20px;
+}
+.elTabs{
+  width: 80%;
+  margin: 0 auto;
+  font-size: 20px;
 }
 .el-carousel__item h3 {
   color: #475669;

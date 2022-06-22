@@ -2,12 +2,11 @@
   <div class="test">
     <h1>test组件</h1>
     <button @click="handlerTest">测试</button>
-
   </div>
 </template>
 
 <script>
-import { reqSingerAll } from "@/api";
+import { reqQrKey } from "@/api";
 
 export default {
   name: "Test",
@@ -23,7 +22,7 @@ export default {
   },
   methods: {
     async handlerTest() {
-      let result = await reqSingerAll();
+      let result = await reqQrKey();
       console.log(result);
     },
 
