@@ -5,7 +5,7 @@
 真实网易云接口
 
 #### 软件架构
-  Bootstrap + vue2 + Element UI
+  Bootstrap + vue2 + Element UI + axios
 
 #### 安装教程
 1.  npm i 
@@ -137,15 +137,15 @@ this.$router.push({
 >Object.assign
 ```js
 let obj1 = {a:1,b:2}
-			let obj2 = {c:3,d:4}
-			let obj3 = {e:5,f:6}
-			let obj4 = {x:7,y:8}
+let obj2 = {c:3,d:4}
+let obj3 = {e:5,f:6}
+let obj4 = {x:7,y:8}
 
-			// obj1 = {...obj1,...obj2,...obj3,...obj4}
+// obj1 = {...obj1,...obj2,...obj3,...obj4}
 
-			Object.assign(obj1,obj2,obj3,obj4,{x:''})
+Object.assign(obj1,obj2,obj3,obj4,{x:''})
 
-			console.log(obj1)
+console.log(obj1)
 ```
 
 

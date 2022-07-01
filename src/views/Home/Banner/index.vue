@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="350px">
+  <el-carousel :interval="2000" type="card" height="350px">
     <el-carousel-item v-for="(banner,index) in bannerList" :key="banner.encodeId + index">
       <img :src="banner.imageUrl" alt="">
     </el-carousel-item>
